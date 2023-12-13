@@ -1,0 +1,63 @@
+import tkinter as tk
+from tkinter import messagebox, filedialog, Menu, ttk, colorchooser
+
+def update_label_scale(val):
+    scale_value_label.config(text=f"Scale Value: {val}")
+
+def show_color_chooser():
+    color = colorchooser.askcolor(title="Choose a color")
+    if color[1] is not None:
+        canvas_frame.config(bg=color[1])
+
+def open_file():
+    filedialog.askopenfilename(title="Open File")
+
+def show_about_dialog():
+    messagebox.showinfo("About", "Tkinter Example Application")
+
+# Initialize the main window
+root = tk.Tk()
+root.title("Tkinter Widgets Example")
+
+# Canvas with an oval
+canvas_frame = tk.Frame(root, bg='white', width=200, height=100)
+canvas_frame.pack(pady=20)
+canvas = tk.Canvas(canvas_frame, bg='white', width=200, height=100)
+canvas.pack()
+canvas.create_oval(10, 10, 190, 90, fill='blue')
+
+# Scale widget
+scale_label = tk.Label(root, text="Adjust Scale:")
+scale_label.pack()
+scale = tk.Scale(root, from_=0, to=100, orient='horizontal', command=update_label_scale)
+scale.pack()
+
+# Label to display scale value
+scale_value_label = tk.Label(root, text="Scale Value: 50")
+scale_value_label.pack()
+
+# Frame widget
+frame = tk.Frame(root, borderwidth=2, relief='sunken', width=100, height=100)
+frame.pack(pady=20)
+
+# Update button to change frame color
+update_btn = tk.Button(root, text="Change Frame Colour", command=show_color_chooser)
+update_btn.pack()
+
+# Menubar
+menubar = Menu(root)
+file_menu = Menu(menubar, tearoff=0)
+file_menu.add_command(label="Open", command=open_file)
+file_menu.add_separator()
+file_menu.add_command(label="Exit", command=root.quit)
+menubar.add_cascade(label="File", menu=file_menu)
+
+help_menu = Menu(menubar, tearoff=0)
+help_menu.add_command(label="About", command=show_about_dialog)
+menubar.add_cascade(label="Help", menu=help_menu)
+
+# Configure the menubar
+root.config(menu=menubar)
+
+# Run the main loop
+root.mainloop()
