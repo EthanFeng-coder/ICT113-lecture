@@ -1,13 +1,24 @@
-import random
+class Book:
+    def __init__(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+    
+    def __repr__(self):
+        return f"{self.title} by {self.author}"
 
-myList = [1, 2, 3, 4, 5]
+# Example list of books in a library
+library = [
+    Book("1984", "George Orwell", "978-0451524935"),
+    Book("To Kill a Mockingbird", "Harper Lee", "978-0446310789"),
+    Book("The Great Gatsby", "F. Scott Fitzgerald", "978-0743273565")
+]
 
-# Pick a single random item
-print(random.choice(myList))
+# Processing each book in the list
+for book in library:
+    print(book)
 
-# Pick 3 random unique items
-print(random.sample(myList, 3))
-
-# Shuffle the list in place
-random.shuffle(myList)
-print(myList)
+# Example output:
+# 1984 by George Orwell
+# To Kill a Mockingbird by Harper Lee
+# The Great Gatsby by F. Scott Fitzgerald
